@@ -1,0 +1,51 @@
+package org.transferservice.controller;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.transferservice.model.FavoriteRecipient;
+import org.transferservice.service.FavoriteRecipientService;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/favorites")
+public class FavoriteRecipientController {
+
+
+    private  FavoriteRecipientService favoriteRecipientService;
+
+    public FavoriteRecipientController(FavoriteRecipientService favoriteRecipientService) {
+        this.favoriteRecipientService = favoriteRecipientService;
+    }
+
+    @PostMapping
+    public ResponseEntity<FavoriteRecipient> addFavoriteRecipient(@RequestBody FavoriteRecipient favoriteRecipient) {
+        FavoriteRecipient createdFavoriteRecipient = favoriteRecipientService.addFavoriteRecipient(favoriteRecipient);
+        return new ResponseEntity<>(createdFavoriteRecipient, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/user/{customerId}")
+    public ResponseEntity<List<FavoriteRecipient>> getFavoriteRecipientsByCustomerId(@PathVariable Long customerId) {
+        List<FavoriteRecipient> favoriteRecipients = favoriteRecipientService.getFavoriteRecipientsByCustomerId(customerId);
+        return new ResponseEntity<>(favoriteRecipients, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{customerId}/recipient/{accountNumber}")
+    public ResponseEntity<FavoriteRecipient> getFavoriteRecipientByCustomerIdAndAccountNumber(
+            @PathVariable Long customerId, @PathVariable String accountNumber) {
+        Optional<FavoriteRecipient> favoriteRecipient = favoriteRecipientService.getFavoriteRecipientByCustomerIdAndAccountNumber(customerId, accountNumber);
+        return favoriteRecipient.map(recipient -> new ResponseEntity<>(recipient, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> removeFavoriteRecipient(@PathVariable Long id) {
+        favoriteRecipientService.removeFavoriteRecipient(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+}
