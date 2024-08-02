@@ -18,6 +18,7 @@ import java.util.Optional;
 public class AccountController {
 
 
+    @Autowired
     private AccountService accountService;
 
 
