@@ -30,6 +30,19 @@ public class AccountService {
 
     }
 
+    public Double getAccountBalance(Long id){
+
+        Optional<Account> accountopt = accountRepository.findById(id);
+
+        if(accountopt.isPresent()){
+            return accountopt.get().getBalance();
+        }
+        else {
+            throw new IllegalArgumentException("Account not found");
+        }
+
+    }
+
     public Account updateAccount(Account account) {
 
         return accountRepository.save(account);

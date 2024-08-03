@@ -11,7 +11,14 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TransactionDTO {
 
-    private Long id;
+//    private Long id;
+
+    private Long senderAccountId;
+    private Long recipientAccountId;
+    private Double amount;
+    private String currency;
+    private String status;
+    private String description;
 
 
 }
