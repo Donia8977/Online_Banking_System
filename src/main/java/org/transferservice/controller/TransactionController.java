@@ -4,6 +4,7 @@ package org.transferservice.controller;
 import jakarta.validation.Valid;
 import lombok.Data;
 //import org.hibernate.Transaction;
+import org.transferservice.dto.TransactionDTO;
 import org.transferservice.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class TransactionController {
 
     }
 
-    @GetMapping
+    @GetMapping("/transactionHistory")
     public ResponseEntity<List<Transaction>> getTransactionHistory(
             @RequestParam
             Long accountId,
@@ -53,9 +54,10 @@ public class TransactionController {
         return ResponseEntity.ok(transactions);
     }
 
-    @PostMapping("/transactions")
-    public ResponseEntity<Transaction> createTransaction(@RequestBody @Valid Transaction transaction) {
-        Transaction createdTransaction = transactionService.createTransaction(transaction);
+
+    @PostMapping("/transfer")
+    public ResponseEntity<Transaction> createTransaction(@RequestBody @Valid TransactionDTO transactionDTO) {
+        Transaction createdTransaction = transactionService.createTransaction(transactionDTO);
         return ResponseEntity.ok(createdTransaction);
     }
 
