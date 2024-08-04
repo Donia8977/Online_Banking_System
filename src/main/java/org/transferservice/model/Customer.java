@@ -73,7 +73,8 @@ public class Customer {
                 .nationality(this.nationality)
                 .nationalIdNumber(this.nationalIdNumber)
                 .dateOfBirth(this.dateOfBirth)
-                .account(this.account.toDTO())
+//                .account(this.account.toDTO())
+                .account(this.account != null ? this.account.toDTO() : null)
                 .build();
     }
 }
