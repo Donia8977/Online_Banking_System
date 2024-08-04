@@ -1,11 +1,13 @@
 package org.transferservice.dto;
 
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
+@Builder
 public class UpdateCustomerDTO {
 
     private final String firstName;
