@@ -7,10 +7,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.transferservice.dto.CustomerDTO;
 import org.transferservice.dto.UpdateCustomerDTO;
+import org.transferservice.dto.UpdateProfileDTO;
 import org.transferservice.exception.custom.CustomerNotFoundException;
 import org.transferservice.exception.response.ErrorDetails;
 import org.transferservice.model.Customer;
@@ -50,4 +53,19 @@ public class CustomerController {
         return customerService.updateCustomer(id, updateCustomerDTO);
     }
 
+    @PutMapping("/profile/{customerId}")
+    public ResponseEntity<Customer> updateProfile(@PathVariable Long customerId, @RequestBody UpdateProfileDTO updateProfileDTO) {
+        try {
+            Customer updatedCustomer = customerService.updateProfile(customerId, updateProfileDTO);
+            return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
+        } catch (CustomerNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
+
+
+
+
+

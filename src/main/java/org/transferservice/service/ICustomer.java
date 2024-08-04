@@ -2,6 +2,7 @@ package org.transferservice.service;
 
 import org.transferservice.dto.CustomerDTO;
 import org.transferservice.dto.UpdateCustomerDTO;
+import org.transferservice.dto.UpdateProfileDTO;
 import org.transferservice.exception.custom.CustomerNotFoundException;
 import org.transferservice.model.Customer;
 
@@ -36,4 +37,5 @@ public interface ICustomer {
      */
     CustomerDTO getCustomerById(Long id) throws CustomerNotFoundException;
 
+    Customer updateProfile(Long customerId, UpdateProfileDTO updateProfileDTO) throws CustomerNotFoundException;
 }
