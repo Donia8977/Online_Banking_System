@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 
 @Data
+@Builder
 public class CreateCustomerDTO {
 
     private final Long id;
