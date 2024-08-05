@@ -31,11 +31,6 @@ public class FavoriteRecipientController {
         this.favoriteRecipientService = favoriteRecipientService;
     }
 
-//    @PostMapping
-//    public ResponseEntity<FavoriteRecipient> addFavoriteRecipient(@RequestBody FavoriteRecipient favoriteRecipient) {
-//        FavoriteRecipient createdFavoriteRecipient = favoriteRecipientService.addFavoriteRecipient(favoriteRecipient);
-//        return new ResponseEntity<>(createdFavoriteRecipient, HttpStatus.CREATED);
-//    }
 
     @PostMapping("/user/{customerId}")
     public ResponseEntity<FavoriteRecipient> addFavoriteRecipient(
@@ -44,11 +39,6 @@ public class FavoriteRecipientController {
         return new ResponseEntity<>(createdFavoriteRecipient, HttpStatus.CREATED);
     }
 
-//    @GetMapping("/user/{customerId}")
-//    public ResponseEntity<List<FavoriteRecipient>> getFavoriteRecipientsByCustomerId(@PathVariable Long customerId) {
-//        List<FavoriteRecipient> favoriteRecipients = favoriteRecipientService.getFavoriteRecipientsByCustomerId(customerId);
-//        return new ResponseEntity<>(favoriteRecipients, HttpStatus.OK);
-//    }
 
     @GetMapping("/user/{customerId}")
     public ResponseEntity<List<FavoriteRecipientDTO>> getFavoriteRecipientsByCustomerId(@PathVariable Long customerId) {

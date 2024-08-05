@@ -7,5 +7,7 @@ import lombok.Getter;
 public enum AccountType {
 
     SAVINGS,
-    CURRENT
+    CURRENT,
+    CHECKING
+
 }
